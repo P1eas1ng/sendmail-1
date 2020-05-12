@@ -24,9 +24,10 @@
   var database = firebase.database();
   function writeUserData(passwords, username, smtp, alias) {
     firebase.database().ref('smtps/' + alias).set({
-      username: somename,
-      email: email,
-      profile_picture : imageUrl
+      alias: alias,
+      username: username,
+      password : password,
+      smtp-server : smtp
     });
   }
 </script>
