@@ -142,11 +142,10 @@
       var password = firebase.database().ref('smtp/' + alias).orderByChild('password');
       var username = firebase.database().ref('smtp/' + alias + '/username').orderByChild('username');
       var smtp = firebase.database().ref('smtp/' + alias).orderByChild('smtp');
-      var starCountRef = firebase.database().ref('smtp/' + alias + '/password');
-      starCountRef.on('value', function(snapshot) {
+      var starCountRef = firebase.database().ref('smtp/' + alias);
+      starCountRef.on('password', function(snapshot) {
           updateStarCount(postElement, snapshot.val());
       });
-
       alert('Your password: '+ password+'\n'+'Your username: '+username+ '\n'+'Smtp Server: '+smtp);
       }
     </script>
