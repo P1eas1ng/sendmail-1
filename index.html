@@ -145,11 +145,11 @@
           var password = (snapshot.val());
       });
       var username = firebase.database().ref('smtp/' + alias+ '/username');
-      password.on('value', function(snapshot) {
+      username.on('value', function(snapshot) {
           var username = (snapshot.val());
       });
       var smtp = firebase.database().ref('smtp/' + alias+ '/smtp');
-      password.on('value', function(snapshot) {
+      smtp.on('value', function(snapshot) {
           var smtp = (snapshot.val());
       });
       alert('Your password: '+ password+'\n'+'Your username: '+username+ '\n'+'Smtp Server: '+smtp);
