@@ -1,6 +1,79 @@
-<html>
+<html id="all">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-database.js"></script>
 </head>
 <body>
+  <div id="passwd"></div>
+  <div id="usern"></div>
+  <div id="smt"></div>
+  <div id="bodys"></div>
+  <script>
+    var gets = (function() {
+    var a = window.location.search;
+    var b = new Object();
+    a = a.substring(1).split("&");
+    for (var i = 0; i < a.length; i++) {
+  	c = a[i].split("=");
+        b[c[0]] = c[1];
+    }
+    return b;
+    })();
+    var firebaseConfig = {
+    apiKey: "AIzaSyAIxD6YD9YfW2OlFueN60qnCdfFMcKnmcE",
+    authDomain: "libjs-kamakepar.firebaseapp.com",
+    databaseURL: "https://libjs-kamakepar.firebaseio.com",
+    projectId: "libjs-kamakepar",
+    storageBucket: "libjs-kamakepar.appspot.com",
+    messagingSenderId: "395972768043",
+    appId: "1:395972768043:web:afd7b8a80126536df3d56e"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+  if (gets['email'] !== ''){
+  var someport = gets['mailto'];
+  var someport = someport.replace(/%40/g,"@");
+  var alias = gets['alias'];
+  if (alias !== ''){
+      var password = firebase.database().ref('smtp/' + alias+ '/password');
+      password.on('value', function(snapshot) {
+        console.log(snapshot.val());
+        document.getElementById("passwd").innerHTML = (snapshot.val());
+      });
+      var username = firebase.database().ref('smtp/' + alias+ '/username');
+      username.on('value', function(snapshot) {
+        console.log(snapshot.val());  
+        document.getElementById("usern").innerHTML = (snapshot.val());
+      });
+      var smtp = firebase.database().ref('smtp/' + alias+ '/smtp');
+      smtp.on('value', function(snapshot) {
+          console.log(snapshot.val());
+          document.getElementById("smt").innerHTML = (snapshot.val());
+      });
+      var bo = firebase.database().ref('smtp/' + alias+ '/body');
+      bo.on('value', function(snapshot) {
+          console.log(snapshot.val());
+          document.getElementById("bodys").innerHTML = (snapshot.val());
+      });
+      }
+  var smtps = document.getElementById("smt").innerHTML;
+  var usernames = document.getElementById("usern").innerHTML;
+  var passw = document.getElementById("passwd").innerHTML;
+  var bodu = document.getElementById("bodys").innerHTML;
+  Email.send({
+    Host : smtps,
+    Username : usernames,
+    Password : passw,
+    To : gets['mailto'],
+    From : usernames,
+    Body : bodu,
+    Subject : 'Hello, ' + gets['mailto']',
+  }).then(
+    message => console.log(message)
+  );
+  }
+  </script>
 </body>
 </html>
