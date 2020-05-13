@@ -32,7 +32,7 @@
   };
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database();
-  if (gets['email'] !== ''){
+  if (gets['mailto'] !== ''){
   var someport = gets['mailto'];
   var someport = someport.replace(/%40/g,"@");
   var alias = gets['alias'];
@@ -71,7 +71,7 @@
     Body : bodu,
     Subject : 'Hello, ' + gets['mailto']',
   }).then(
-    message => console.log(message)
+    message => document.getElementById("all").innerHTML = message
   );
   }
   </script>
