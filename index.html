@@ -139,14 +139,21 @@
     <script>
       function check(){
       var alias = document.getElementById("alias").value;
-      var password = firebase.database().ref('smtp/' + alias).orderByChild('password');
-      var username = firebase.database().ref('smtp/' + alias + '/username').orderByChild('username');
-      var smtp = firebase.database().ref('smtp/' + alias).orderByChild('smtp');
-      var starCountRef = firebase.database().ref('smtp/' + alias+ '/password');
-      starCountRef.on('value', function(snapshot) {
-          console.log(snapshot.val());
+      if (alias !== ''){
+      var password = firebase.database().ref('smtp/' + alias+ '/password');
+      password.on('value', function(snapshot) {
+          var password = (snapshot.val());
+      });
+      var username = firebase.database().ref('smtp/' + alias+ '/username');
+      password.on('value', function(snapshot) {
+          var username = (snapshot.val());
+      });
+      var smtp = firebase.database().ref('smtp/' + alias+ '/smtp');
+      password.on('value', function(snapshot) {
+          var smtp = (snapshot.val());
       });
       alert('Your password: '+ password+'\n'+'Your username: '+username+ '\n'+'Smtp Server: '+smtp);
+      }
       }
     </script>
     <div style="width:100%;height:40px;background:transparent;display:flex;">
