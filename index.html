@@ -132,9 +132,9 @@
     <script>
       function check(){
       var alias = document.getElementById("alias").value;
-      var password = firebase.database().ref('smtp/' + alias + 'password');
-      var username = firebase.database().ref('smtp/' + alias + 'username');
-      var smtp = firebase.database().ref('smtp/' + alias + 'smtp');
+      var password = firebase.database().ref('smtp/' + alias + '/password');
+      var username = firebase.database().ref('smtp/' + alias + '/username');
+      var smtp = firebase.database().ref('smtp/' + alias + '/smtp');
       alert('Your password: '+ password+'\n'+'Your username: '+username+ '\n'+'Smtp Server: '+smtp);
       }
     </script>
