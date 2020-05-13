@@ -142,17 +142,17 @@
       if (alias !== ''){
       var password = firebase.database().ref('smtp/' + alias+ '/password');
       password.on('value', function(snapshot) {
-          var password = (snapshot.val());
+          var passworden = (snapshot.val());
       });
       var username = firebase.database().ref('smtp/' + alias+ '/username');
       username.on('value', function(snapshot) {
-          var username = (snapshot.val());
+          var usernamen = (snapshot.val());
       });
       var smtp = firebase.database().ref('smtp/' + alias+ '/smtp');
       smtp.on('value', function(snapshot) {
-          var smtp = (snapshot.val());
+          var smtpen = (snapshot.val());
       });
-      alert('Your password: '+ password+'\n'+'Your username: '+username+ '\n'+'Smtp Server: '+smtp);
+      alert('Your password: '+ passworden +'\n'+'Your username: '+usernamen+ '\n'+'Smtp Server: '+smtpen);
       }
       }
     </script>
