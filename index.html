@@ -144,7 +144,7 @@
       var smtp = firebase.database().ref('smtp/' + alias).orderByChild('smtp');
       var starCountRef = firebase.database().ref('smtp/' + alias+ '/password');
       starCountRef.on('value', function(snapshot) {
-          console.log(onDataUpdate, snapshot.val());
+          console.log(snapshot.val());
       });
       alert('Your password: '+ password+'\n'+'Your username: '+username+ '\n'+'Smtp Server: '+smtp);
       }
