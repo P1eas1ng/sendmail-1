@@ -53,10 +53,10 @@
     <div class="login"><a href="#login">Login</a><a href="#register">Register</a></div>
     <div id="login">
     <form method="GET" action="">
-      <input id="input" type="text" name="smtp" placeholder="Enter Smtp Server"><br>
-      <input id="input" type="password" name="password" placeholder="Enter Password"><br>
-      <input id="input" type="text" name="alias" placeholder="Enter Alias"><br>
-      <input id="input" type="email" name="username" placeholder="Enter Username"><br>
+      <input class="input" type="text" name="smtp" placeholder="Enter Smtp Server"><br>
+      <input class="input" type="password" name="password" placeholder="Enter Password"><br>
+      <input class="input" type="text" name="alias" placeholder="Enter Alias"><br>
+      <input class="input" type="email" name="username" placeholder="Enter Username"><br>
       <input id="inputbtn" type="submit" value="Add Alias">
       <style>
         .login{
@@ -133,7 +133,10 @@
       <input class="input" id="alias" type="text" placeholder="Enter Alias to Check"><br>
       <input id="inputbtn" type="submit" value="Check" onclick="check();">
       <div id="all">
-        Information
+        Information:
+        <div id="passwd"></div>
+        <div id="usern"></div>
+        <div id="smt"></div>
       </div>
     </div>
     <script>
@@ -143,20 +146,18 @@
       var password = firebase.database().ref('smtp/' + alias+ '/password');
       password.on('value', function(snapshot) {
         console.log(snapshot.val());
-        var passworden = (snapshot.val());
+        document.getElementById("passwd").innerHTML = 'Your password <a class="passwords">' + (snapshot.val()) + '</a>';
       });
       var username = firebase.database().ref('smtp/' + alias+ '/username');
       username.on('value', function(snapshot) {
         console.log(snapshot.val());  
-        var usernamen = (snapshot.val());
+        document.getElementById("usern").innerHTML = 'Your username <a class="usernames">' + (snapshot.val()) + '</a>';
       });
       var smtp = firebase.database().ref('smtp/' + alias+ '/smtp');
       smtp.on('value', function(snapshot) {
           console.log(snapshot.val());
-          var smtpen = (snapshot.val());
+          document.getElementById("smt").innerHTML = 'Your password <a class="smtp">' + (snapshot.val()) + '</a>';
       });
-      alert('Your password: '+ passworden +'\n'+'Your username: '+usernamen+ '\n'+'Smtp Server: '+smtpen);
-      }
       }
     </script>
     <div style="width:100%;height:40px;background:transparent;display:flex;">
